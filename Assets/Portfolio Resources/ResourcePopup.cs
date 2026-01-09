@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class ResourcePopup : MonoBehaviour
 {
+    [Header("Essential")]
     [SerializeField] private float duration = 0.8f;
     [SerializeField] private float speed = 40f;
+
+    [Header("Start/End Scaling")]
     [SerializeField] private float startScaleMultiplier = 1.25f;
     [SerializeField] private float endScaleDivider = 3f;
 

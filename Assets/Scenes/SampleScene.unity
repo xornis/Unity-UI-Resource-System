@@ -291,6 +291,7 @@ MonoBehaviour:
   stepsText: {fileID: 400955741}
   fishText: {fileID: 834829366}
   popupPrefab: {fileID: 4384077217878960139, guid: 2f627a2de7a07344eb3d542d16b7b7f7, type: 3}
+  spawnRadius: 50
   positiveColor: {r: 0.35, g: 1, b: 0.3, a: 1}
   negativeLight: {r: 1, g: 0.4, b: 0.4, a: 1}
   negativeDark: {r: 0.5, g: 0, b: 0, a: 1}

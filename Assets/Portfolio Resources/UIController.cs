@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
 
     [Header("Popup Settings")]
     [SerializeField] private GameObject popupPrefab;
+    [SerializeField] private float spawnRadius = 30f;
     [SerializeField] private Color positiveColor = new Color(0.35f, 1f, 0.3f);
     [SerializeField] private Color negativeLight = new Color(1f, 0.4f, 0.4f);
     [SerializeField] private Color negativeDark = new Color(0.5f, 0f, 0f);
@@ -34,7 +35,8 @@ public class UIController : MonoBehaviour
         if (popupPrefab == null) return;
 
         GameObject go = Instantiate(popupPrefab, parent);
-        go.transform.localPosition = new Vector3(-45f, 0f, 0f);
+
+        go.transform.localPosition = RandomOffset(spawnRadius);
 
         var popup = go.GetComponent<ResourcePopup>();
 
@@ -47,6 +49,12 @@ public class UIController : MonoBehaviour
         }
 
         popup.Initialization(amount, finalColor);
+    }
+
+    private Vector3 RandomOffset(float offsetRange)
+    {
+        float randomOffset = Random.Range(-offsetRange, offsetRange);
+        return new Vector3(randomOffset, randomOffset, 0f);
     }
 
     private void UpdateResourceUI(TextMeshProUGUI text, ResourceData data)
