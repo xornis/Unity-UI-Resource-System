@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     [Header("Popup Settings")]
     [SerializeField] private GameObject popupPrefab;
     [SerializeField] private float spawnRadius = 30f;
+    [SerializeField] private float turn = 15f;
     [SerializeField] private Color positiveColor = new Color(0.35f, 1f, 0.3f);
     [SerializeField] private Color negativeLight = new Color(1f, 0.4f, 0.4f);
     [SerializeField] private Color negativeDark = new Color(0.5f, 0f, 0f);
@@ -37,6 +38,7 @@ public class UIController : MonoBehaviour
         GameObject go = Instantiate(popupPrefab, parent);
 
         go.transform.localPosition = RandomOffset(spawnRadius);
+        go.transform.localRotation = RandomTurn(turn);
 
         var popup = go.GetComponent<ResourcePopup>();
 
@@ -55,6 +57,12 @@ public class UIController : MonoBehaviour
     {
         float randomOffset = Random.Range(-offsetRange, offsetRange);
         return new Vector3(randomOffset, randomOffset, 0f);
+    }
+
+    private Quaternion RandomTurn(float turnRange)
+    {
+        float randomTurn = Random.Range(-turnRange, turnRange);
+        return Quaternion.Euler(0f, 0f, randomTurn);
     }
 
     private void UpdateResourceUI(TextMeshProUGUI text, ResourceData data)
