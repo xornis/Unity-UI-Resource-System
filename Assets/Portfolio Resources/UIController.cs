@@ -11,12 +11,12 @@ public struct ResourceUIElement
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private GameEvents gameEvents;
+    [SerializeField] private ResourceEvents resourceEvents;
     [SerializeField] private ResourcePopupVisualSettings visualSettings;
     [SerializeField] private List<ResourceUIElement> uIElements;
 
-    private void OnEnable() => gameEvents.OnResourceChanged += HandleResourceChange;
-    private void OnDisable() => gameEvents.OnResourceChanged -= HandleResourceChange;
+    private void OnEnable() => resourceEvents.OnResourceChanged += HandleResourceChange;
+    private void OnDisable() => resourceEvents.OnResourceChanged -= HandleResourceChange;
 
     private void HandleResourceChange(ResourceType type, ResourceData data)
     {

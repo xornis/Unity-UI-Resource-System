@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c3360da08653c4bbd72755a83e63c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvents: {fileID: 11400000, guid: 574bc81d8e71f5d498a9794a7f317333, type: 2}
+  resourceEvents: {fileID: 11400000, guid: 574bc81d8e71f5d498a9794a7f317333, type: 2}
   visualSettings: {fileID: 11400000, guid: 414f5702891a25648b3506a4dfe49eb5, type: 2}
   uIElements:
   - type: 0
@@ -756,7 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5579a051a47e94e8c4f5f0c2d3f7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvents: {fileID: 11400000, guid: 574bc81d8e71f5d498a9794a7f317333, type: 2}
+  resourceEvents: {fileID: 11400000, guid: 574bc81d8e71f5d498a9794a7f317333, type: 2}
   initialResourceSetup:
   - type: 0
     maxValue: 100
@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d98ac02a5d0564abe7326039074b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runController: {fileID: 613189751}
+  resourceManager: {fileID: 613189751}
   type: 0
   amount: -10
 --- !u!1 &1189996969
@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d98ac02a5d0564abe7326039074b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runController: {fileID: 613189751}
+  resourceManager: {fileID: 613189751}
   type: 0
   amount: 10
 --- !u!1660057539 &9223372036854775807

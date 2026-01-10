@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class RunController : MonoBehaviour
+public class ResourceManager : MonoBehaviour
 {
-    [SerializeField] private GameEvents gameEvents;
+    [SerializeField] private ResourceEvents resourceEvents;
 
     [System.Serializable]
     public struct ResourceSetup
@@ -24,7 +24,7 @@ public class RunController : MonoBehaviour
     private void Start()
     {
         foreach (var resource in resources)
-            gameEvents.CallResourceChanged(resource.Key, resource.Value);
+            resourceEvents.CallResourceChanged(resource.Key, resource.Value);
     }
 
     public void ChangeResource(ResourceType type, int amount)
@@ -35,7 +35,7 @@ public class RunController : MonoBehaviour
             data.delta = amount;
             resources[type] = data;
 
-            gameEvents.CallResourceChanged(type, data);
+            resourceEvents.CallResourceChanged(type, data);
         }
     }
 }

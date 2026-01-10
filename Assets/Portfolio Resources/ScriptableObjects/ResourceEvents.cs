@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameEvents", menuName = "Scriptable Objects/UnityUIResourceSystem/GameEvents")]
-public class GameEvents : ScriptableObject
+[CreateAssetMenu(fileName = "ResourceEvents", menuName = "Scriptable Objects/UnityUIResourceSystem/ResourceEvents")]
+public class ResourceEvents : ScriptableObject
 {
     public event System.Action<ResourceType, ResourceData> OnResourceChanged;
 

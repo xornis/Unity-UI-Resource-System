@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class ResourceButton : MonoBehaviour
 {
-    [SerializeField] private RunController runController;
+    [SerializeField] private ResourceManager resourceManager;
     [SerializeField] private ResourceType type;
     [SerializeField] private int amount;
 
     public void ExecuteChange()
     {
-        if (runController != null)
-            runController.ChangeResource(type, amount);
+        if (resourceManager != null)
+            resourceManager.ChangeResource(type, amount);
     }
 }
