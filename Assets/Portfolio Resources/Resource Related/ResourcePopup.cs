@@ -3,13 +3,7 @@ using UnityEngine;
 
 public class ResourcePopup : MonoBehaviour
 {
-    [Header("Essential")]
-    [SerializeField] private float duration = 0.8f;
-    [SerializeField] private float speed = 40f;
-
-    [Header("Start/End Scaling")]
-    [SerializeField] private float startScaleMultiplier = 1.25f;
-    [SerializeField] private float endScaleDivider = 3f;
+    [SerializeField] private ResourcePopupVisualSettings visualSettings;
 
     private TextMeshProUGUI popupText;
     private float timer;
@@ -23,17 +17,17 @@ public class ResourcePopup : MonoBehaviour
 
         direction = amount > 0 ? Vector3.up : Vector3.down;
 
-        transform.localScale = Vector3.one * startScaleMultiplier;
+        transform.localScale = Vector3.one * visualSettings.StartScaleMultiplier;
     }
 
     private void Update()
     {
         timer += Time.deltaTime;
-        float progress = timer / duration;
+        float progress = timer / visualSettings.Duration;
 
-        transform.localPosition += direction * speed * Time.deltaTime;
+        transform.localPosition += direction * visualSettings.Speed * Time.deltaTime;
 
-        transform.localScale = Vector3.Lerp(Vector3.one * startScaleMultiplier, Vector3.one / endScaleDivider, progress);
+        transform.localScale = Vector3.Lerp(Vector3.one * visualSettings.StartScaleMultiplier, Vector3.one / visualSettings.EndScaleDivider, progress);
 
         if (popupText != null)
         {
@@ -42,6 +36,6 @@ public class ResourcePopup : MonoBehaviour
             popupText.color = color;
         }
 
-        if (timer >= duration) Destroy(gameObject);
+        if (timer >= visualSettings.Duration) Destroy(gameObject);
     }
 }

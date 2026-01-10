@@ -1,53 +1,58 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
+
+[System.Serializable]
+public struct ResourceUIElement
+{
+    public ResourceType type;
+    public TextMeshProUGUI text;
+}
 
 public class UIController : MonoBehaviour
 {
-    [Header("Events")]
     [SerializeField] private GameEvents gameEvents;
+    [SerializeField] private ResourcePopupVisualSettings visualSettings;
+    [SerializeField] private List<ResourceUIElement> uIElements;
 
-    [Header("Settings")]
-    [SerializeField] private TextMeshProUGUI stepsText;
-    [SerializeField] private TextMeshProUGUI fishText;
+    private void OnEnable() => gameEvents.OnResourceChanged += HandleResourceChange;
+    private void OnDisable() => gameEvents.OnResourceChanged -= HandleResourceChange;
 
-    [Header("Popup Settings")]
-    [SerializeField] private GameObject popupPrefab;
-    [SerializeField] private float spawnRadius = 30f;
-    [SerializeField] private float turn = 15f;
-    [SerializeField] private Color positiveColor = new Color(0.35f, 1f, 0.3f);
-    [SerializeField] private Color negativeLight = new Color(1f, 0.4f, 0.4f);
-    [SerializeField] private Color negativeDark = new Color(0.5f, 0f, 0f);
-
-    private void OnEnable()
+    private void HandleResourceChange(ResourceType type, ResourceData data)
     {
-        gameEvents.OnStepsChanged += UpdateStepsUIText;
-        gameEvents.OnFishingAttemptsChanged += UpdateFishUIText;
+        foreach (var element in uIElements)
+        {
+            if (element.type == type)
+            {
+                UpdateResourceUI(element.text, data);
+                break;
+            }
+        }
     }
 
-    private void OnDisable()
+    private void UpdateResourceUI(TextMeshProUGUI text, ResourceData data)
     {
-        gameEvents.OnStepsChanged -= UpdateStepsUIText;
-        gameEvents.OnFishingAttemptsChanged -= UpdateFishUIText;
+        text.text = $"{data.current}/{data.max}";
+        if (data.delta != 0) SpawnPopup(text.transform, data.delta);
     }
 
     private void SpawnPopup(Transform parent, int amount)
     {
-        if (popupPrefab == null) return;
+        if (visualSettings.PopupPrefab == null) return;
 
-        GameObject go = Instantiate(popupPrefab, parent);
+        GameObject go = Instantiate(visualSettings.PopupPrefab, parent);
 
-        go.transform.localPosition = RandomOffset(spawnRadius);
-        go.transform.localRotation = RandomTurn(turn);
+        go.transform.localPosition = RandomOffset(visualSettings.SpawnRadius);
+        go.transform.localRotation = RandomTurn(visualSettings.Turn);
 
         var popup = go.GetComponent<ResourcePopup>();
 
         Color finalColor;
-        if (amount > 0) finalColor = positiveColor;
+        if (amount > 0) finalColor = visualSettings.PositiveColor;
         else
         {
             float intensity = Mathf.InverseLerp(0, 5, Mathf.Abs(amount));
-            finalColor = Color.Lerp(negativeLight, negativeDark, intensity);
+            finalColor = Color.Lerp(visualSettings.NegativeLight, visualSettings.NegativeDark, intensity);
         }
 
         popup.Initialization(amount, finalColor);
@@ -64,14 +69,4 @@ public class UIController : MonoBehaviour
         float randomTurn = Random.Range(-turnRange, turnRange);
         return Quaternion.Euler(0f, 0f, randomTurn);
     }
-
-    private void UpdateResourceUI(TextMeshProUGUI text, ResourceData data)
-    {
-        text.text = $"{data.current}/{data.max}";
-
-        if (data.delta != 0) SpawnPopup(text.transform, data.delta);
-    }
-
-    private void UpdateStepsUIText(ResourceData data) => UpdateResourceUI(stepsText, data);
-    private void UpdateFishUIText(ResourceData data) => UpdateResourceUI(fishText, data);
 }

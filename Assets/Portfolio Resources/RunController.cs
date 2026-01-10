@@ -1,49 +1,41 @@
 using UnityEngine;
-
-public struct ResourceData
-{
-    public int current;
-    public int max;
-    public int delta;
-
-    public ResourceData(int current, int max, int delta)
-    {
-        this.current = current;
-        this.max = max;
-        this.delta = delta;
-    }
-}
+using System.Collections.Generic;
 
 public class RunController : MonoBehaviour
 {
-    [Header("Events")]
     [SerializeField] private GameEvents gameEvents;
 
-    [Header("Settings")]
-    [SerializeField] private int maxSteps = 10;
-    [SerializeField] private int maxFishingAttempts = 5;
+    [System.Serializable]
+    public struct ResourceSetup
+    {
+        public ResourceType type;
+        public int maxValue;
+    }
 
-    private int stepsLeft;
-    private int fishingAttemptsLeft;
+    [SerializeField] private List<ResourceSetup> initialResourceSetup;
 
+    private Dictionary<ResourceType, ResourceData> resources = new();
+
+    private void Awake()
+    {
+        foreach (var resource in initialResourceSetup)
+            resources[resource.type] = new(resource.maxValue, resource.maxValue, 0);
+    }
     private void Start()
     {
-        stepsLeft = maxSteps;
-        fishingAttemptsLeft = maxFishingAttempts;
-
-        gameEvents.CallStepsChanged(new ResourceData(stepsLeft, maxSteps, 0));
-        gameEvents.CallFishingAttemptsChanged(new ResourceData(fishingAttemptsLeft, maxFishingAttempts, 0));
+        foreach (var resource in resources)
+            gameEvents.CallResourceChanged(resource.Key, resource.Value);
     }
 
-    public void ChangeSteps(int amount)
+    public void ChangeResource(ResourceType type, int amount)
     {
-        stepsLeft += amount;
-        gameEvents.CallStepsChanged(new ResourceData(stepsLeft, maxSteps, amount));
-    }
+        if (resources.TryGetValue(type, out ResourceData data))
+        {
+            data.current += amount;
+            data.delta = amount;
+            resources[type] = data;
 
-    public void ChangeFishingAttempts(int amount)
-    {
-        fishingAttemptsLeft += amount;
-        gameEvents.CallFishingAttemptsChanged(new ResourceData(fishingAttemptsLeft, maxFishingAttempts, amount));
+            gameEvents.CallResourceChanged(type, data);
+        }
     }
 }

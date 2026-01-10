@@ -149,7 +149,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f54130ec57a4a94a9af6ab6afde76d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
-  speed: 100
-  startScaleMultiplier: 1
-  endScaleDivider: 2
+  visualSettings: {fileID: 11400000, guid: 414f5702891a25648b3506a4dfe49eb5, type: 2}
