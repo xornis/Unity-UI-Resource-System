@@ -1,4 +1,4 @@
-# Unity Resource & Popup System
+# Simple Resource & Popup System
 ## Simple and clean system for managing resources with UI feedback.
 
 ### How to use:
@@ -9,11 +9,13 @@
 5. Put ```UIController.cs``` on Canvas, drag there your assets and set **UI Elements**.
 6. Put ```ResourceButton.cs``` or ```SimpleResourceRegenerator.cs``` *(for resource auto-regen)* on Button. 
 
-#### Important: You need TextMeshPro to make everything work.
+#### Important: 
+1. You need **TextMeshPro** to make everything work.
+2. If you imported this asset and **EventSystem** is not working, delete asset's and create a new one that works with your version.
 
 ---
 
-### Why this architecture?
+### About architecture & Why this architecture?
 1. Event-Based: UI and Logic are separated via ScriptableObjects.
 2. Safe Data: All changes are only through **ChangeResource** method inside ```ResourceManager.cs```.
 3. Data-Driven Popups: All visuals are tweaked in the Inspector, not in code.
