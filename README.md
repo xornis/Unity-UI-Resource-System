@@ -1,6 +1,13 @@
 # Simple Resource & Popup System
 ## Simple and clean system for managing resources with UI feedback.
 
+![Image](https://github.com/user-attachments/assets/1aa9bfcb-2716-4506-b73d-352c2c5f5608)
+<img width="741" height="243" alt="resourceManager" src="https://github.com/user-attachments/assets/e7bcc246-6061-4d53-8960-4a61ca8b8bde" />
+<img width="223" height="223" alt="hierarchy" src="https://github.com/user-attachments/assets/6865238b-8ff7-4c88-b892-c3838b6a0230" />
+<img width="738" height="539" alt="popupSettings" src="https://github.com/user-attachments/assets/a7b61b0d-4986-406d-aaeb-5ccd676fc036" />
+
+---
+
 ### How to use:
 1. Create ScriptableObject assets ```ResourceEvents.asset``` and ```PopupSettings.asset```.
 2. Create **Popup Prefab**, drag and set ```ResourcePopup.cs``` *(ensure it has a TextMeshProUGUI component)* on **Popup Prefab** and put it in ```PopupSettings.asset```.
