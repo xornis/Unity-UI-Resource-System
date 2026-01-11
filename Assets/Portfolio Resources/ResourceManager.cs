@@ -4,21 +4,13 @@ using System.Collections.Generic;
 public class ResourceManager : MonoBehaviour
 {
     [SerializeField] private ResourceEvents resourceEvents;
-
-    [System.Serializable]
-    public struct ResourceSetup
-    {
-        public ResourceType type;
-        public int maxValue;
-    }
-
-    [SerializeField] private List<ResourceSetup> initialResourceSetup;
+    [SerializeField] private List<ResourceSetup> startingResources;
 
     private Dictionary<ResourceType, ResourceData> resources = new();
 
     private void Awake()
     {
-        foreach (var resource in initialResourceSetup)
+        foreach (var resource in startingResources)
             resources[resource.type] = new(resource.maxValue, resource.maxValue, 0);
     }
     private void Start()
@@ -37,5 +29,12 @@ public class ResourceManager : MonoBehaviour
 
             resourceEvents.CallResourceChanged(type, data);
         }
+    }
+
+    [System.Serializable]
+    private struct ResourceSetup
+    {
+        public ResourceType type;
+        public int maxValue;
     }
 }

@@ -1,7 +1,8 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "ResourcePopupVisualSettings", menuName = "Scriptable Objects/UnityUIResourceSystem/ResourcePopupVisualSettings")]
-public class ResourcePopupVisualSettings : ScriptableObject
+[CreateAssetMenu(fileName = "PopupSettings", menuName = "Scriptable Objects/UnityUIResourceSystem/PopupSettings")]
+public class PopupSettings : ScriptableObject
 {
     [Header("Popup Prefab")]
     [SerializeField] private GameObject popupPrefab;
@@ -17,9 +18,7 @@ public class ResourcePopupVisualSettings : ScriptableObject
     [SerializeField] private float turn = 15f;
 
     [Header("Colors")]
-    [SerializeField] private Color positiveColor = new Color(0.35f, 1f, 0.3f);
-    [SerializeField] private Color negativeLight = new Color(1f, 0.4f, 0.4f);
-    [SerializeField] private Color negativeDark = new Color(0.5f, 0f, 0f);
+    [SerializeField] private List<ResourceColorData> resourceColorDatas;
 
     public GameObject PopupPrefab => popupPrefab;
 
@@ -31,7 +30,19 @@ public class ResourcePopupVisualSettings : ScriptableObject
     public float SpawnRadius => spawnRadius;
     public float Turn => turn;
     
-    public Color PositiveColor => positiveColor;
-    public Color NegativeLight => negativeLight;
-    public Color NegativeDark => negativeDark;
+    public ResourceColorData GetColorData(ResourceType type)
+    {
+        foreach (var colorData in resourceColorDatas)
+            if (colorData.type == type)
+                return colorData;
+        return default;
+    }
+
+    [System.Serializable]
+    public struct ResourceColorData
+    {
+        public ResourceType type;
+        public Color positiveColor;
+        public Color negativeColor;
+    }
 }

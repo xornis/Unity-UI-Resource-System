@@ -3,22 +3,11 @@ using UnityEngine;
 
 public class ResourcePopup : MonoBehaviour
 {
-    [SerializeField] private ResourcePopupVisualSettings visualSettings;
+    [SerializeField] private PopupSettings visualSettings;
 
     private TextMeshProUGUI popupText;
     private float timer;
     private Vector3 direction;
-
-    public void Initialization(int amount, Color color)
-    {
-        popupText = GetComponent<TextMeshProUGUI>();
-        popupText.text = amount > 0 ? $"(+{amount})" : $"({amount.ToString()})";
-        popupText.color = color;
-
-        direction = amount > 0 ? Vector3.up : Vector3.down;
-
-        transform.localScale = Vector3.one * visualSettings.StartScaleMultiplier;
-    }
 
     private void Update()
     {
@@ -37,5 +26,16 @@ public class ResourcePopup : MonoBehaviour
         }
 
         if (timer >= visualSettings.Duration) Destroy(gameObject);
+    }
+
+    public void Initialization(int amount, Color color)
+    {
+        popupText = GetComponent<TextMeshProUGUI>();
+        popupText.text = amount > 0 ? $"(+{amount})" : $"({amount.ToString()})";
+        popupText.color = color;
+
+        direction = amount > 0 ? Vector3.up : Vector3.down;
+
+        transform.localScale = Vector3.one * visualSettings.StartScaleMultiplier;
     }
 }

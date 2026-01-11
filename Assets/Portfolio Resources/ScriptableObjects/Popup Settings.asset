@@ -19,6 +19,7 @@ MonoBehaviour:
   endScaleDivider: 3
   spawnRadius: 30
   turn: 15
-  positiveColor: {r: 0.35, g: 1, b: 0.3, a: 1}
-  negativeLight: {r: 1, g: 0.4, b: 0.4, a: 1}
-  negativeDark: {r: 0.5, g: 0, b: 0, a: 1}
+  resourceColorDatas:
+  - type: 0
+    positiveColor: {r: 0.4481132, g: 1, b: 0.45746815, a: 1}
+    negativeColor: {r: 0.8773585, g: 0.27727836, b: 0.27727836, a: 1}
