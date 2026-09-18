@@ -28,3 +28,6 @@
 3. Data-Driven Popups: All visuals are tweaked in the Inspector, not in code.
 4. Scalable: Easy to add new resource type, just by adding a new one in Enum.
 5. I really love clean code.
+
+## License
+This project is licensed under the [MIT License](LICENSE).
